@@ -158,6 +158,15 @@ jobs:
           - **windowsterminal** - Windows Terminal (https://github.com/microsoft/terminal)
           - **xfce4terminal** - XFCE Terminal (https://docs.xfce.org/apps/xfce4-terminal/)
 
+          ### Console
+          - **freebsd_vt** - FreeBSD VT console color themes
+          - **linux_console** - Linux console color themes
+
+          ### Shell
+          - **dynamic-colors** - OSC4 (shell) dynamic color themes
+          - **generic** - Universal shell scripts using OSC escape codes
+          - **iterm-dynamic** - iTerm2 (shell) dynamic color themes
+
           ### Formats & Standards
           - **yaml** - YAML format color definitions
           - **xrdb** - X11 resource database format
@@ -170,11 +179,7 @@ jobs:
           - **vhs** - VHS (https://github.com/charmbracelet/vhs)
           - **vscode** - Visual Studio Code (https://code.visualstudio.com/)
 
-          ### Legacy & Specialized
-          - **freebsd_vt** - FreeBSD VT console color themes
-          - **dynamic-colors** - OSC4 (shell) dynamic color themes
-          - **iterm-dynamic** - iTerm2 (shell) dynamic color themes
-          - **linux_console** - Linux console color themes
+          ### Legacy
           - **termite** - Termite (https://github.com/thestinger/termite)
 
           ## Complete Archive
