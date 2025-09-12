@@ -1,4 +1,4 @@
-name: Create Terminal Color Schemes Release
+name: Create Terminal themes Release
 
 on:
   schedule:
@@ -32,7 +32,7 @@ jobs:
             echo "release_name=${{ github.event.inputs.release_name }}" >> $GITHUB_OUTPUT
           else
             echo "tag_name=release-$TIMESTAMP-$SHORT_SHA" >> $GITHUB_OUTPUT
-            echo "release_name=Terminal Color Schemes - $(date '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
+            echo "release_name=Terminal Themes - $SHORT_SHA" >> $GITHUB_OUTPUT
           fi
 
           echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
@@ -75,10 +75,10 @@ jobs:
               file_count=$(find "$dir" -type f | wc -l)
               if [ $file_count -gt 0 ]; then
                 # Create tar.gz archive
-                tar -czf "releases/${dir}-schemes.tgz" "$dir"
+                tar -czf "releases/${dir}-themes.tgz" "$dir"
 
                 # Create 7z archive
-                7z a "releases/${dir}-schemes.7z" "$dir"
+                7z a "releases/${dir}-themes.7z" "$dir"
 
                 echo "✓ Created archives for $dir ($file_count files)"
               else
@@ -91,9 +91,9 @@ jobs:
 
           # Create a complete archive
           echo "Creating complete archive (excluding screenshots and backgrounds)..."
-          tar -czf "releases/all-terminal-schemes.tgz" "${ALL_DIRS[@]}"
+          tar -czf "releases/all-terminal-themes.tgz" "${ALL_DIRS[@]}"
 
-          7z a "releases/all-terminal-schemes.7z" "${ALL_DIRS[@]}"
+          7z a "releases/all-terminal-themes.7z" "${ALL_DIRS[@]}"
 
           echo "✓ Created complete archives"
 
@@ -106,7 +106,7 @@ jobs:
         run: |
           # Generate timestamp-based release notes
           cat > release_notes.md << EOF
-          # Terminal Color Schemes - $(date '+%Y-%m-%d %H:%M:%S UTC')
+          # Terminal Themes - $(date '+%Y-%m-%d')
 
           **Commit:** [\`${{ steps.vars.outputs.short_sha }}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
           **Build:** ${{ steps.vars.outputs.timestamp }}
@@ -118,7 +118,7 @@ jobs:
             echo ""
             echo "${{ steps.changes.outputs.changed_dirs }}" | while read -r dir; do
               if [ -n "$dir" ] && [ -d "$dir" ]; then
-                echo "- **$dir** - $(echo $dir | tr '_' ' ' | sed 's/\b\w/\U&/g') color schemes"
+                echo "- **$dir** - $(echo $dir | tr '_' ' ' | sed 's/\b\w/\U&/g') themes"
               fi
             done
             echo ""
@@ -128,7 +128,7 @@ jobs:
             git log --oneline -5 --no-merges
             echo "\`\`\`"
           else
-            echo "This is a manually triggered release containing all available color schemes."
+            echo "This is a manually triggered release containing all available themes."
           fi)
 
           ## Individual Downloads
@@ -136,16 +136,16 @@ jobs:
           Choose the archive for your specific terminal emulator:
 
           ### Terminal Emulators
-          - **alacritty** - Alacritty terminal color schemes
-          - **ghostty** - Ghostty terminal color schemes
-          - **gnome_terminal** - GNOME Terminal color schemes
-          - **iterm2** - iTerm2 terminal color schemes
-          - **kitty** - Kitty terminal color schemes
-          - **konsole** - KDE Konsole color schemes
-          - **terminal.app** - macOS Terminal.app color schemes
-          - **terminator** - Terminator terminal color schemes
-          - **windowsterminal** - Windows Terminal color schemes
-          - **xfce4terminal** - XFCE Terminal color schemes
+          - **alacritty** - Alacritty terminal color themes
+          - **ghostty** - Ghostty terminal color themes
+          - **gnome_terminal** - GNOME Terminal color themes
+          - **iterm2** - iTerm2 terminal color themes
+          - **kitty** - Kitty terminal color themes
+          - **konsole** - KDE Konsole color themes
+          - **terminal.app** - macOS Terminal.app color themes
+          - **terminator** - Terminator terminal color themes
+          - **windowsterminal** - Windows Terminal color themes
+          - **xfce4terminal** - XFCE Terminal color themes
 
           ### Formats & Standards
           - **yaml** - YAML format color definitions
@@ -153,26 +153,26 @@ jobs:
           - **generic** - Universal shell scripts using OSC escape codes
 
           ### Applications & Tools
-          - **vim** - Vim/Neovim color schemes
-          - **vscode** - Visual Studio Code color schemes
+          - **vim** - Vim/Neovim color themes
+          - **vscode** - Visual Studio Code color themes
 
           ### Legacy & Specialized
-          - **freebsd_vt** - FreeBSD VT console color schemes
-          - **iterm-dynamic** - iTerm2 (shell) dynamic color schemes
-          - **linux_console** - Linux console color schemes
-          - **lxterminal** - LXTerminal color schemes
-          - **mobaxterm** - MobaXterm color schemes
-          - **putty** - PuTTY color schemes
-          - **qt_creator** - Qt Creator color schemes
-          - **remmina** - Remmina color schemes
-          - **rio** - Rio terminal color schemes
-          - **termite** - Termite terminal color schemes (archived)
-          - **termux** - Termux Android terminal color schemes
-          - **tilda** - Tilda drop-down terminal color schemes
+          - **freebsd_vt** - FreeBSD VT console color themes
+          - **iterm-dynamic** - iTerm2 (shell) dynamic color themes
+          - **linux_console** - Linux console color themes
+          - **lxterminal** - LXTerminal color themes
+          - **mobaxterm** - MobaXterm themes
+          - **putty** - PuTTY themes
+          - **qt_creator** - Qt Creator themes
+          - **remmina** - Remmina themes
+          - **rio** - Rio terminal themes
+          - **termite** - Termite terminal themes (archived)
+          - **termux** - Termux Android terminal themes
+          - **tilda** - Tilda drop-down terminal themes
 
           ## Complete Archive
 
-          The `all-terminal-schemes` archives contain all terminal emulator formats in a single download (screenshots excluded to reduce size).
+          The `all-terminal-themes` archives contain all terminal emulator formats in a single download (screenshots excluded to reduce size).
 
           ## Installation
 
