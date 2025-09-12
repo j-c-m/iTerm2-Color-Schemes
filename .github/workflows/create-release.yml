@@ -73,6 +73,7 @@ jobs:
         run: |
           # Dynamically discover all directories, excluding screenshots and backgrounds
           mv schemes iterm2
+          mv terminal terminal.app
           ALL_DIRS=($(find . -maxdepth 1 -type d -name '[a-zA-Z]*' ! -name 'screenshots' ! -name 'backgrounds' ! -name '.*' ! -name 'tools' | sed 's|./||' | sort))
           mkdir -p releases
 
@@ -85,7 +86,7 @@ jobs:
               file_count=$(find "$dir" -type f | wc -l)
               if [ $file_count -gt 0 ]; then
                 # Create tar.gz archive
-                tar -czf "releases/${dir}-schemes.tar.gz" "$dir"
+                tar -czf "releases/${dir}-schemes.tgz" "$dir"
 
                 # Create 7z archive
                 7z a "releases/${dir}-schemes.7z" "$dir"
@@ -101,7 +102,7 @@ jobs:
 
           # Create a complete archive
           echo "Creating complete archive (excluding screenshots and backgrounds)..."
-          tar -czf "releases/all-terminal-schemes.tar.gz" "${ALL_DIRS[@]}"
+          tar -czf "releases/all-terminal-schemes.tgz" "${ALL_DIRS[@]}"
 
           7z a "releases/all-terminal-schemes.7z" "${ALL_DIRS[@]}"
 
@@ -152,7 +153,7 @@ jobs:
           - **iterm2** - iTerm2 terminal color schemes
           - **kitty** - Kitty terminal color schemes
           - **konsole** - KDE Konsole color schemes
-          - **terminal** - macOS Terminal.app color schemes
+          - **terminal.app** - macOS Terminal.app color schemes
           - **terminator** - Terminator terminal color schemes
           - **windowsterminal** - Windows Terminal color schemes
           - **xfce4terminal** - XFCE Terminal color schemes
@@ -248,7 +249,7 @@ jobs:
             if [ -f "$file" ]; then
               filename=$(basename "$file")
               size=$(ls -lh "$file" | awk '{print $5}')
-              if [[ "$filename" == *".tar.gz" ]]; then
+              if [[ "$filename" == *".tgz" ]]; then
                 filetype="tar.gz"
               else
                 filetype="7z"
