@@ -1,4 +1,4 @@
-name: Create Terminal themes Release
+name: Create Terminal Themes Release
 
 on:
   schedule:
@@ -63,7 +63,7 @@ jobs:
           # Dynamically discover all directories, excluding screenshots and backgrounds
           mv schemes iterm2
           mv terminal terminal.app
-          ALL_DIRS=($(find . -maxdepth 1 -type d -name '[a-zA-Z]*' ! -name 'screenshots' ! -name 'backgrounds' ! -name '.*' ! -name 'tools' | sed 's|./||' | sort))
+          ALL_DIRS=($(find . -maxdepth 1 -type d -name '[a-zA-Z]*' ! -name 'screenshots' ! -name 'backgrounds' ! -name '.*' ! -name 'tools' ! -name 'gh-pages' | sed 's|./||' | sort))
           mkdir -p releases
 
           # Create individual archives for each terminal emulator directory
@@ -106,7 +106,7 @@ jobs:
         run: |
           # Generate timestamp-based release notes
           cat > release_notes.md << EOF
-          # Terminal Themes - $(date '+%Y-%m-%d')
+          # Terminal Themes - $SHORT_SHA
 
           **Commit:** [\`${{ steps.vars.outputs.short_sha }}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
           **Build:** ${{ steps.vars.outputs.timestamp }}
@@ -136,16 +136,27 @@ jobs:
           Choose the archive for your specific terminal emulator:
 
           ### Terminal Emulators
-          - **alacritty** - Alacritty terminal color themes
-          - **ghostty** - Ghostty terminal color themes
-          - **gnome_terminal** - GNOME Terminal color themes
-          - **iterm2** - iTerm2 terminal color themes
-          - **kitty** - Kitty terminal color themes
-          - **konsole** - KDE Konsole color themes
-          - **terminal.app** - macOS Terminal.app color themes
-          - **terminator** - Terminator terminal color themes
-          - **windowsterminal** - Windows Terminal color themes
-          - **xfce4terminal** - XFCE Terminal color themes
+          - **alacritty** - Alacritty (https://alacritty.org/)
+          - **electerm** - Electerm (https://electerm.html5beta.com/)
+          - **foot** - Foot (https://codeberg.org/dnkl/foot)
+          - **ghostty** - Ghostty (https://ghostty.org/)
+          - **iterm2** - iTerm2 (https://iterm2.com/)
+          - **kitty** - Kitty (https://sw.kovidgoyal.net/kitty/)
+          - **konsole** - KDE Konsole (https://konsole.kde.org/)
+          - **lxterminal** - LXTerminal (https://lxde.org/)
+          - **mobaxterm** - MobaXterm (https://mobaxterm.mobatek.net/)
+          - **pantheon-terminal** - Pantheon Terminal (https://elementary.io/)
+          - **putty** - PuTTY (https://www.putty.org/)
+          - **rio** - Rio (https://rioterm.com/)
+          - **royalts** - RoyalTS (https://royalts.com/ts/)
+          - **terminal.app** - macOS Terminal.app (https://support.apple.com/guide/terminal)
+          - **terminator** - Terminator (https://gnome-terminator.org/)
+          - **termux** - Termux (https://termux.com/)
+          - **tilda** - Tilda (https://github.com/lanoxx/tilda)
+          - **wayst** - Wayst (https://github.com/91861/wayst)
+          - **wezterm** - WezTerm (https://wezterm.org/)
+          - **windowsterminal** - Windows Terminal (https://github.com/microsoft/terminal)
+          - **xfce4terminal** - XFCE Terminal (https://docs.xfce.org/apps/xfce4-terminal/)
 
           ### Formats & Standards
           - **yaml** - YAML format color definitions
@@ -153,22 +164,18 @@ jobs:
           - **generic** - Universal shell scripts using OSC escape codes
 
           ### Applications & Tools
-          - **vim** - Vim/Neovim color themes
-          - **vscode** - Visual Studio Code color themes
+          - **hexchat** - HexChat IRC client (https://hexchat.github.io/)
+          - **remmina** - Remmina Remote Desktop Client (https://remmina.org/)
+          - **termframe** - TermFrame (https://terminaltrove.com/termframe/)
+          - **vhs** - VHS (https://github.com/charmbracelet/vhs)
+          - **vscode** - Visual Studio Code (https://code.visualstudio.com/)
 
           ### Legacy & Specialized
           - **freebsd_vt** - FreeBSD VT console color themes
+          - **dynamic-colors** - OSC4 (shell) dynamic color themes
           - **iterm-dynamic** - iTerm2 (shell) dynamic color themes
           - **linux_console** - Linux console color themes
-          - **lxterminal** - LXTerminal color themes
-          - **mobaxterm** - MobaXterm themes
-          - **putty** - PuTTY themes
-          - **qt_creator** - Qt Creator themes
-          - **remmina** - Remmina themes
-          - **rio** - Rio terminal themes
-          - **termite** - Termite terminal themes (archived)
-          - **termux** - Termux Android terminal themes
-          - **tilda** - Tilda drop-down terminal themes
+          - **termite** - Termite (https://github.com/thestinger/termite)
 
           ## Complete Archive
 
