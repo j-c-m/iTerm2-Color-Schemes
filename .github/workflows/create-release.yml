@@ -32,7 +32,7 @@ jobs:
             echo "release_name=${{ github.event.inputs.release_name }}" >> $GITHUB_OUTPUT
           else
             echo "tag_name=release-$TIMESTAMP-$SHORT_SHA" >> $GITHUB_OUTPUT
-            echo "release_name=Terminal Themes - $SHORT_SHA" >> $GITHUB_OUTPUT
+            echo "release_name=Terminal Themes - $(date +'%Y%m%d')" >> $GITHUB_OUTPUT
           fi
 
           echo "short_sha=$SHORT_SHA" >> $GITHUB_OUTPUT
@@ -106,7 +106,7 @@ jobs:
         run: |
           # Generate timestamp-based release notes
           cat > release_notes.md << EOF
-          # Terminal Themes - $SHORT_SHA
+          # Terminal Themes - $(date +'%Y%m%d')
 
           **Commit:** [\`${{ steps.vars.outputs.short_sha }}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
           **Build:** ${{ steps.vars.outputs.timestamp }}
