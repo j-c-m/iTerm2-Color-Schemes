@@ -1,19 +1,8 @@
 name: Create Terminal Color Schemes Release
 
 on:
-  push:
-    branches:
-      - master
-      - main
-    paths:
-      - "**"
-      - "!screenshots/**"
-      - "!backgrounds/**"
-      - "!README.md"
-      - "!CREDITS.md"
-      - "!LICENSE"
-      - "!.gitignore"
-      - "!.github/**"
+  schedule:
+    - cron: "0 15 * * 1" # Run every Monday at 15:00 UTC
   workflow_dispatch: # Allows manual triggering
     inputs:
       release_name:
