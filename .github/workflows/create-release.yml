@@ -72,6 +72,7 @@ jobs:
       - name: Create release archives
         run: |
           # Dynamically discover all directories, excluding screenshots and backgrounds
+          mv schemes iterm2
           ALL_DIRS=($(find . -maxdepth 1 -type d -name '[a-zA-Z]*' ! -name 'screenshots' ! -name 'backgrounds' ! -name '.*' ! -name 'tools' | sed 's|./||' | sort))
           mkdir -p releases
 
@@ -84,10 +85,10 @@ jobs:
               file_count=$(find "$dir" -type f | wc -l)
               if [ $file_count -gt 0 ]; then
                 # Create tar.gz archive
-                tar -czf "releases/${dir}-color-schemes.tar.gz" "$dir"
+                tar -czf "releases/${dir}-schemes.tar.gz" "$dir"
 
                 # Create 7z archive
-                7z a "releases/${dir}-color-schemes.7z" "$dir"
+                7z a "releases/${dir}-schemes.7z" "$dir"
 
                 echo "✓ Created archives for $dir ($file_count files)"
               else
@@ -100,9 +101,9 @@ jobs:
 
           # Create a complete archive
           echo "Creating complete archive (excluding screenshots and backgrounds)..."
-          tar -czf "releases/all-terminal-color-schemes.tar.gz" "${ALL_DIRS[@]}"
+          tar -czf "releases/all-terminal-schemes.tar.gz" "${ALL_DIRS[@]}"
 
-          7z a "releases/all-terminal-color-schemes.7z" "${ALL_DIRS[@]}"
+          7z a "releases/all-terminal-schemes.7z" "${ALL_DIRS[@]}"
 
           echo "✓ Created complete archives"
 
@@ -148,6 +149,8 @@ jobs:
           - **alacritty** - Alacritty terminal color schemes
           - **ghostty** - Ghostty terminal color schemes
           - **gnome_terminal** - GNOME Terminal color schemes
+          - **iterm2** - iTerm2 terminal color schemes
+          - **kitty** - Kitty terminal color schemes
           - **konsole** - KDE Konsole color schemes
           - **terminal** - macOS Terminal.app color schemes
           - **terminator** - Terminator terminal color schemes
@@ -155,7 +158,6 @@ jobs:
           - **xfce4terminal** - XFCE Terminal color schemes
 
           ### Formats & Standards
-          - **schemes** - Original iTerm2 .itermcolors files
           - **yaml** - YAML format color definitions
           - **xrdb** - X11 resource database format
           - **generic** - Universal shell scripts using OSC escape codes
@@ -166,6 +168,7 @@ jobs:
 
           ### Legacy & Specialized
           - **freebsd_vt** - FreeBSD VT console color schemes
+          - **iterm-dynamic** - iTerm2 (shell) dynamic color schemes
           - **linux_console** - Linux console color schemes
           - **lxterminal** - LXTerminal color schemes
           - **mobaxterm** - MobaXterm color schemes
@@ -179,7 +182,7 @@ jobs:
 
           ## Complete Archive
 
-          The `all-terminal-color-schemes` archives contain all terminal emulator formats in a single download (screenshots excluded to reduce size).
+          The `all-terminal-schemes` archives contain all terminal emulator formats in a single download (screenshots excluded to reduce size).
 
           ## Installation
 
